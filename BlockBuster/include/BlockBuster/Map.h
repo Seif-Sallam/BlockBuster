@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "BlockBuster/Common.h"
+#include "BlockBuster/StaticBlock.h"
 
 #include <vector>
 #include <string>
@@ -25,4 +26,6 @@ private:
     sf::VertexArray m_Verticies;
     sf::Shader m_Shader;
     sf::Vector2u m_ExitCoord;
+
+    std::vector<StaticBlock> m_StaticBlocks;
 };

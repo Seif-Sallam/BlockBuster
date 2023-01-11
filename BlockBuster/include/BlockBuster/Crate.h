@@ -14,6 +14,6 @@ protected:
     void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 private:
     sf::Sprite m_Sprite;
-    sf::Texture m_Texture;
+    sf::Texture* m_Texture;
     sf::Vector2i m_Position;
 };

@@ -7,7 +7,11 @@ add_executable(BlockBuster
 	include/BlockBuster/Map.h
 	include/BlockBuster/Application.h
 	include/BlockBuster/ResourceManager.h
+	include/BlockBuster/StaticBlock.h
+	include/BlockBuster/CrateSpot.h
 
+	src/BlockBuster/CrateSpot.cpp
+	src/BlockBuster/StaticBlock.cpp
 	src/BlockBuster/main.cpp
 	src/BlockBuster/Crate.cpp
 	src/BlockBuster/Map.cpp
