@@ -16,7 +16,8 @@ enum Direction {
 };
 
 Application::Application(int argc, const char* argv[])
-    : m_Window(sf::RenderWindow(sf::VideoMode(800,600), "BlockBuster"))
+    : m_Window(sf::RenderWindow(sf::VideoMode(800,600), "BlockBuster")),
+    m_LevelEditor(&m_Window)
 {
     m_IsInFocus = m_Window.hasFocus();
     parseArgs(argc, argv);
@@ -27,6 +28,7 @@ Application::Application(int argc, const char* argv[])
     m_Map.loadMap(RESOURCE_DIR"Maps/TestMap.png");
     m_Bob.Init();
     m_Bob.setTilePosition(sf::Vector2i(5, 5));
+    m_InLevelEditor = false;
 }
 
 void Application::run()
@@ -121,6 +123,8 @@ void Application::handleEvents()
                 m_DrawLogger = !m_DrawLogger;
             if (event.key.code == sf::Keyboard::Escape)
                 m_Window.close();
+            if (event.key.code == sf::Keyboard::E)
+                m_InLevelEditor = !m_InLevelEditor;
         }
 
         if (event.type == sf::Event::Resized)
@@ -129,14 +133,24 @@ void Application::handleEvents()
             m_View.setCenter(m_View.getSize() / 2.0f);
         }
 
+        if (m_InLevelEditor)
+        {
+            m_LevelEditor.handleEvents(event);
+        }
+
     }
 }
 
 void Application::update()
 {
+
     auto deltaTime = m_InternalClock.restart();
     ImGui::SFML::Update(m_Window, deltaTime);
-
+    if (m_InLevelEditor)
+    {
+        m_LevelEditor.update(deltaTime);
+        return;
+    }
     bobMovement(deltaTime);
 
     cratesLogic(deltaTime);
@@ -146,9 +160,15 @@ void Application::render()
 {
     m_Window.setView(m_View);
     m_Window.clear();
-    m_Window.draw(m_Map);
-    m_Window.draw(m_Bob);
-
+    if (m_InLevelEditor)
+    {
+        m_Window.draw(m_LevelEditor);
+    }
+    else
+    {
+        m_Window.draw(m_Map);
+        m_Window.draw(m_Bob);
+    }
     if (m_DrawLogger)
         Util::Logger::Draw("Logger", &m_DrawLogger);
     ImGui::SFML::Render(m_Window);

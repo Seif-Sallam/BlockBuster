@@ -4,6 +4,8 @@
 #include <BlockBuster/Bob.h>
 #include <BlockBuster/Map.h>
 
+#include "BlockBuster/LevelEditor.h"
+
 class Application{
 public:
     Application(int argc, const char* argv[]);
@@ -26,6 +28,8 @@ private:
     Map m_Map;
     sf::View m_View;
 
+    LevelEditor m_LevelEditor;
+    bool m_InLevelEditor;
 
     bool m_DrawLogger;
     bool m_IsInFocus;

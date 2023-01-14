@@ -9,7 +9,13 @@ add_executable(BlockBuster
 	include/BlockBuster/ResourceManager.h
 	include/BlockBuster/StaticBlock.h
 	include/BlockBuster/CrateSpot.h
+	include/BlockBuster/LevelEditor.h
+	include/BlockBuster/Block.h
+	include/BlockBuster/Grid.h
 
+	src/BlockBuster/Grid.cpp
+	src/BlockBuster/Block.cpp
+	src/BlockBuster/LevelEditor.cpp
 	src/BlockBuster/CrateSpot.cpp
 	src/BlockBuster/StaticBlock.cpp
 	src/BlockBuster/main.cpp
